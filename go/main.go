@@ -64,6 +64,6 @@ func main() {
 
 	// Afficher les artistes
 	for _, artist := range artists {
-		fmt.Printf("Nom : %s, ID : %d, Babebibobu : %s\n", artist.Name, artist.ID)
+		fmt.Printf("Nom : %s, ID : %d\n", artist.Name, artist.ID)
 	}
 }
