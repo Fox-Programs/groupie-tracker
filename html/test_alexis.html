@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche d'artistes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        /* Style pour la barre de recherche */
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Style pour la liste déroulante */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        /* Style pour chaque élément de la liste */
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Afficher la liste quand elle est active */
+        .dropdown.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input 
+            type="text" 
+            class="search-bar" 
+            placeholder="Recherchez un artiste..." 
+            oninput="filterArtists()"
+            onclick="showDropdown()"
+        >
+        <div class="dropdown" id="artistDropdown">
+            <!-- Liste des artistes -->
+        </div>
+    </div>
+
+    <script>
+        // Liste des artistes
+        const artists = [
+            "Adele", "Beyoncé", "Drake", "Ed Sheeran", "Taylor Swift",
+            "The Weeknd", "Bruno Mars", "Lady Gaga", "Kanye West", "Rihanna",
+            "Justin Bieber", "Ariana Grande", "Kendrick Lamar", "Post Malone", "Dua Lipa",
+            "Shawn Mendes", "Billie Eilish", "Harry Styles", "Selena Gomez", "Doja Cat",
+            // Ajoutez autant d'artistes que nécessaire
+        ];
+
+        // Référence au menu déroulant
+        const dropdown = document.getElementById("artistDropdown");
+
+        // Ajouter tous les artistes dans la liste
+        function populateDropdown() {
+            dropdown.innerHTML = "";
+            artists.forEach(artist => {
+                const item = document.createElement("div");
+                item.className = "dropdown-item";
+                item.textContent = artist;
+                item.onclick = () => selectArtist(artist);
+                dropdown.appendChild(item);
+            });
+        }
+
+        // Filtrer les artistes en fonction de l'entrée utilisateur
+        function filterArtists() {
+            const query = document.querySelector(".search-bar").value.toLowerCase();
+            dropdown.innerHTML = "";
+            artists
+                .filter(artist => artist.toLowerCase().includes(query))
+                .forEach(artist => {
+                    const item = document.createElement("div");
+                    item.className = "dropdown-item";
+                    item.textContent = artist;
+                    item.onclick = () => selectArtist(artist);
+                    dropdown.appendChild(item);
+                });
+        }
+
+        // Sélectionner un artiste et remplir la barre de recherche
+        function selectArtist(artist) {
+            document.querySelector(".search-bar").value = artist;
+            dropdown.classList.remove("show");
+        }
+
+        // Afficher la liste déroulante
+        function showDropdown() {
+            dropdown.classList.add("show");
+            populateDropdown();
+        }
+
+        // Cacher la liste déroulante si on clique en dehors
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest(".search-container")) {
+                dropdown.classList.remove("show");
+            }
+        });
+    </script>
+</body>
+</html>
