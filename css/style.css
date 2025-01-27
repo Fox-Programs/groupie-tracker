@@ -1,8 +1,7 @@
-/* Centrage global pour le body */
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column; /* Place les éléments verticalement */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -10,22 +9,19 @@ body {
     background-color: #203041;
 }
 
-/* Style de la zone de recherche (flexbox pour centrer) */
 .rechercher {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 0; /* Supprime les marges perturbantes */
+    margin: 0;
 }
 
-/* Conteneur de recherche */
 .search-container {
     position: relative;
     width: 300px;
 }
 
-/* Champ de recherche */
 .search-input {
     width: 100%;
     padding: 10px 15px;
@@ -36,13 +32,11 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Focus du champ */
 .search-input:focus {
     border-color: #020305;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Bouton de recherche */
 .search-button {
     position: absolute;
     right: -15px;
@@ -56,17 +50,21 @@ body {
     transition: color 0.3s ease;
 }
 
-/* Hover sur le bouton */
 .search-button:hover {
     color: #000000;
 }
 
-/* Titre */
 h1 {
-    font-family: monospace;
+    font-family: 'Orbitron', sans-serif;
     color: #85C1E9;
     font-size: 5vw;
-    margin: 0; /* Supprime les marges inutiles */
+    margin: 0;
     text-align: center;
-    margin-bottom: 5%
+    margin-bottom: 5%;
+    text-shadow: 
+        0 0 5px #00BFFF,
+        0 0 10px #00BFFF, 
+        0 0 15px #00BFFF, 
+        0 0 20px #8A2BE2,
+        0 0 30px #8A2BE2;
 }
