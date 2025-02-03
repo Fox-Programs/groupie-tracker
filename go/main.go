@@ -1,69 +1,33 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"groupie-tracker/models"
+	"html/template"
 	"net/http"
 )
 
-// Artist représente la structure JSON
-type Artist struct {
-	Name string `json:"name"`
-	ID   int    `json:"id"`
-}
-
-// ResponseWrapper encapsule la réponse HTTP et offre des méthodes pratiques
-type ResponseWrapper struct {
-	Body []byte
-}
-
-// GetBody extrait le corps de la réponse HTTP
-func (r *ResponseWrapper) GetBody() []byte {
-	return r.Body
-}
-
-// Unmarshal convertit le corps JSON en une structure Go
-func (r *ResponseWrapper) Unmarshal(v interface{}) error {
-	return json.Unmarshal(r.Body, v)
-}
-
-// FetchURL fait une requête GET et retourne un ResponseWrapper
-func FetchURL(url string) (*ResponseWrapper, error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, fmt.Errorf("erreur lors de la requête : %w", err)
-	}
-	defer resp.Body.Close()
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("erreur lors de la lecture du corps : %w", err)
-	}
-
-	return &ResponseWrapper{Body: body}, nil
-}
+const port = ":8080" // port mis dans une constante pour le réemployer par la suite
 
 func main() {
-	url := "https://groupietrackers.herokuapp.com/api/artists" // Récupération de l'URL pour les infos des artistes
+	// URL de l'API
+	apiURL := "https://groupietrackers.herokuapp.com/api/artists"
 
-	// Faire une requête et obtenir la réponse encapsulée
-	response, err := FetchURL(url)
+	// Appeler la fonction FetchData
+	data, err := models.FetchData(apiURL)
 	if err != nil {
 		fmt.Println("Erreur :", err)
-		return
 	}
 
-	// Désérialiser en une liste d'artistes
-	var artists []Artist
-	err = response.Unmarshal(&artists)
-	if err != nil {
-		fmt.Println("Erreur lors du parsing JSON :", err)
-		return
-	}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { // Page principal avec le premier "/"
+		tpl := template.Must(template.ParseFiles("../templates/accueil.html"))
+		tpl.Execute(w, data)
+	})
+	http.HandleFunc("/secondaire", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
+		tpl := template.Must(template.ParseFiles("../templates/secondaire.html"))
+		tpl.Execute(w, nil)
+	})
 
-	// Afficher les artistes
-	for _, artist := range artists {
-		fmt.Printf("Nom : %s, ID : %d\n", artist.Name, artist.ID)
-	}
+	fmt.Print("Pour accéder au serveur lancé, aller sur la page http://localhost:8080") // Lancement du serveur sur le port 8080
+	http.ListenAndServe(port, nil)                                                      // Utilisée pour démarrer un serveur HTTP (nil car on va utiliser nos propres fonctions)
 }
