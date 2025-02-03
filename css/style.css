@@ -1,66 +1,11 @@
 
-/* Applique une police de caractère générale et configure le style de base pour le body */
-.bouton {
-    font-family: Arial, sans-serif; /* Utilise la police Arial, avec une alternative sans-serif */
-    display: flex; /* Définit un conteneur flex pour le centrage */
-    justify-content: center; /* Centre le contenu horizontalement */
-    align-items: center; /* Centre le contenu verticalement */
-    height: 100vh; /* Définit la hauteur du body à 100% de la hauteur de la fenêtre */
-    margin: 0; /* Supprime les marges par défaut */
-    background-color: #353636; /* Applique une couleur de fond gris clair */
-}
-
-/* Style du conteneur de la barre de recherche */
-.search-container {
-    position: relative; /* Définit une position relative pour positionner les éléments enfants */
-    width: 300px; /* Définit la largeur du conteneur à 300px */
-}
-
-/* Style du champ de saisie (input) */
-.search-input {
-    width: 100%; /* Le champ de saisie prend toute la largeur du conteneur */
-    padding: 10px 15px; /* Ajoute un espacement interne : 10px en haut/bas et 15px à gauche/droite */
-    font-size: 16px; /* Définit la taille du texte à 16px */
-    border: 2px solid #ccc; /* Ajoute une bordure de 2px avec une couleur gris clair */
-    border-radius: 20px; /* Arrondit les coins du champ */
-    outline: none; /* Supprime le contour bleu par défaut au focus */
-    transition: all 0.3s ease; /* Ajoute une transition fluide pour toutes les propriétés */
-}
-
-/* Style appliqué au champ de saisie lorsqu'il est en focus */
-.search-input:focus {
-    border-color: #020305; /* Change la couleur de la bordure en bleu au focus */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Ajoute une ombre bleue douce autour du champ */
-}
-
-/* Style du bouton de recherche */
-.search-button {
-    position: absolute; /* Positionne le bouton par rapport au conteneur parent */
-    right: -15px; /* Place le bouton à 10px du côté droit du conteneur */
-    top: 50%; /* Place le bouton à 50% de la hauteur du conteneur */
-    transform: translateY(-50%); /* Centre verticalement le bouton en ajustant son décalage */
-    background: none; /* Supprime le fond du bouton */
-    border: none; /* Supprime la bordure du bouton */
-    font-size: 18px; /* Définit la taille du texte à 18px */
-    cursor: pointer; /* Change le curseur en pointeur pour indiquer un élément cliquable */
-    color: #555; /* Applique une couleur gris moyen au bouton */
-    transition: color 0.3s ease; /* Ajoute une transition fluide pour le changement de couleur */
-}
-
-/* Style appliqué au bouton lorsque l'utilisateur passe la souris dessus */
-.search-button:hover {
-    color: #000000; /* Change la couleur du bouton en bleu au survol */
-}
-
-.rechercher {
-    display: block;
-    margin-top: -15%;
-    margin-right: 20%;    
+body {
+    background-color: rgb(20, 30, 41);
 }
 
 h1 {
     font-family: 'Times New Roman', Times, serif;
-    color: black;
+    color: rgb(238, 238, 238);
     margin-top: -30%;
     font-size: 5vw;
     display: block;
