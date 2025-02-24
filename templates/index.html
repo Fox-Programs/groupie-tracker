@@ -12,13 +12,13 @@
     <h1>Groupie Tracker</h1>
     <div class="ligne-neon"></div>
     <div class="container">
+        {{ range . }}
+        <div class="box">
+
+            <p>{{ .Name }}</p>
         </div>
-        <div class="container">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
-        </div>
+        {{ end }}
+    </div>
     <div class="search-container">
         <input type="text" placeholder="Rechercher un artiste/groupe" class="search-input">
         <button class="search-button">🔍</button>
