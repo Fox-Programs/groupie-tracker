@@ -12,10 +12,10 @@
     <h1>Groupie Tracker</h1>
     <div class="ligne-neon"></div>
     <div class="container">
-        {{ range . }}
+        {{ range .}}
         <div class="box">
-
-            <p>{{ .Name }}</p>
+            <img src="{{ .Image }}" alt="{{ .Name }}">
+            <h4>{{ .Name }}</h4>
         </div>
         {{ end }}
     </div>
