@@ -20,11 +20,11 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { // Page principal avec le premier "/"
-		tpl := template.Must(template.ParseFiles("../templates/accueil.html"))
+		tpl := template.Must(template.ParseFiles("../templates/index.html"))
 		tpl.Execute(w, data)
 	})
-	http.HandleFunc("/secondaire", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
-		tpl := template.Must(template.ParseFiles("../templates/secondaire.html"))
+	http.HandleFunc("/artiste", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
+		tpl := template.Must(template.ParseFiles("../templates/artiste.html"))
 		tpl.Execute(w, nil)
 	})
 
