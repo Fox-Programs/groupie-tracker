@@ -8,8 +8,14 @@
 
     <title>Groupi Tracker</title>
 </head>
-<body>
+<header>
     <h1>Groupie Tracker</h1>
+    <div class="search-container">
+        <input type="text" placeholder="Rechercher un artiste/groupe" class="search-input">
+        <button class="search-button">🔍</button>
+</header>
+<body>
+   
     <div class="ligne-neon"></div>
     <div class="container">
         {{ range .}}
@@ -19,9 +25,7 @@
         </div>
         {{ end }}
     </div>
-    <div class="search-container">
-        <input type="text" placeholder="Rechercher un artiste/groupe" class="search-input">
-        <button class="search-button">🔍</button>
+    
 
 </body>
 </html>
