@@ -15,6 +15,11 @@
         </div>
         <div class="container">
             <div class="box"></div>
+                {{range .}}
+                    <a href="{{.}}" target="_blank">
+                        <img src="{{.Image}}" alt="{{.Name}}" width="300">
+                    </a>
+                {{end}}
             <div class="box"></div>
             <div class="box"></div>
             <div class="box"></div>
