@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location</title>
 </head>
-<body>
-    
+<body> 
+    {{ range . }}
+    <h3> {{ .Locations }} </h3>
+    <h4> {{ .Dates }} </h4>
+    {{ end }}
 </body>
 </html>

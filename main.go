@@ -23,16 +23,17 @@ func main() {
 	}
 
 	// Appeler la fonction FetchData_locations_dates
-	data_locations, err := models.FetchData_index(apiURL_locations)
+	data_locations, err := models.FetchData_locations_dates(apiURL_locations)
 	if err != nil {
 		fmt.Println("Erreur :", err)
 	}
-	data_dates, err := models.FetchData_index(apiURL_dates)
+	data_dates, err := models.FetchData_locations_dates(apiURL_dates)
 	if err != nil {
 		fmt.Println("Erreur :", err)
 	}
 	data_locations_dates := append(data_locations, data_dates...)
 
+	// Fonctions qui permttent d'envoyer les données de l'API récupéré vers les différentes pages html
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tpl := template.Must(template.ParseFiles("templates/index.html"))
 		tpl.Execute(w, data_index)
