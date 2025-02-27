@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/style.css">
-
     <title>Groupie Tracker</title>
 </head>
 <header>
@@ -13,38 +12,61 @@
     <div class="search-container">
         <input type="text" placeholder="Rechercher un artiste/groupe" class="search-input">
         <button class="search-button">🔍</button>
+    </div>
 </header>
 <body>
     <div class="ligne-neon"></div>
     <div class="container">
         {{ range .}}
         <div class="box">
-            <a href="/artiste" >
-            <img src="{{ .Image }}" alt="{{ .Name }}" >
-            <h4>{{ .Name }}</h4>
-        </a>
+            <a href="/artiste">
+                <img src="{{ .Image }}" alt="{{ .Name }}">
+                <h4>{{ .Name }}</h4>
+            </a>
         </div>
         {{ end }}
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() { // script s'exécutera seulement après que tout le HTML de la page ait été chargé
-            const searchInput = document.querySelector(".search-input"); // cible l’élément HTML qui a la classe search-input
-            const artistBoxes = document.querySelectorAll(".box"); //prends tous les élements présents dans les blocs pour en faire une sorte de liste
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.querySelector(".search-input");
+        const artistBoxes = document.querySelectorAll(".box");
 
-            searchInput.addEventListener("input", function() { //dès qu'on tape quelque chose dans la barre de recherche, la fonction se met en route
-                const searchValue = searchInput.value.toLowerCase(); //ce qui est tapé sera automatiquement mis en minuscule
+        // Création dynamique d'un élément pour le message (si inexistant)
+        let noResultDiv = document.getElementById("no-result-message");
+        if (!noResultDiv) {
+            noResultDiv = document.createElement("div");
+            noResultDiv.id = "no-result-message";
+            noResultDiv.style.display = "none";
+            noResultDiv.style.textAlign = "center";
+            noResultDiv.style.marginTop = "20px";
+            noResultDiv.textContent = "Aucun artiste/groupe trouvé.";
+            // On l'insère après le conteneur existant
+            const container = document.querySelector(".container");
+            container.parentNode.insertBefore(noResultDiv, container.nextSibling);
+        }
 
-                artistBoxes.forEach(box => {
-                    const artistName = box.querySelector("h4").textContent.toLowerCase();
-                    if (artistName.includes(searchValue)) {
-                        box.style.display = "block";
-                    } else {
-                        box.style.display = "none";
-                    }
-                });
+        searchInput.addEventListener("input", function() {
+            const searchValue = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            artistBoxes.forEach(box => {
+                const artistName = box.querySelector("h4").textContent.toLowerCase();
+                if (artistName.includes(searchValue)) {
+                    box.style.display = "block";
+                    visibleCount++;
+                } else {
+                    box.style.display = "none";
+                }
             });
+
+            // Affiche le message si aucun artiste n'est visible, sinon le cache
+            if (visibleCount === 0) {
+                noResultDiv.style.display = "block";
+            } else {
+                noResultDiv.style.display = "none";
+            }
         });
+    });
     </script>
-    
 </body>
 </html>

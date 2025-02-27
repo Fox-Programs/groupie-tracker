@@ -69,7 +69,6 @@ h4 {
     gap: 10px;
     flex-direction: row;
     
-    
 }
 a  {
     display: flex;
@@ -121,4 +120,12 @@ a  {
 /* Effet au survol */
 .search-button:hover {
     background: #cc00cc;
+}
+
+#no-result-message {
+    color: rgb(253, 253, 253) !important;
+    font-size: 2.2em !important;
+    font-weight: bold;
+    text-align: center !important;
+    margin-top: 20px !important;
 }
