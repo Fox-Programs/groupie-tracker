@@ -122,10 +122,25 @@ a  {
     background: #cc00cc;
 }
 
-#no-result-message {
-    color: rgb(253, 253, 253) !important;
-    font-size: 2.2em !important;
-    font-weight: bold;
-    text-align: center !important;
-    margin-top: 20px !important;
+.container {
+    min-height: 500px; /* Réserve un espace fixe pour éviter tout mouvement */
+    position: relative; /* Pour bien positionner le message sans affecter la mise en page */
 }
+
+#no-result-message {
+    position: flex;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 255);
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Caché par défaut */
+    white-space: nowrap; /* Empêche le passage à la ligne */
+    padding: 10px 20px; /* Ajoute de l'espace autour du texte */
+    border-radius: 5px; /* Arrondit les bords */
+    margin-top: 30%;
+    margin-left: 68%;
+}
+
+
+

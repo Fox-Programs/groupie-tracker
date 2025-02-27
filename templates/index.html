@@ -27,46 +27,45 @@
         {{ end }}
     </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const searchInput = document.querySelector(".search-input");
-        const artistBoxes = document.querySelectorAll(".box");
-
-        // Création dynamique d'un élément pour le message (si inexistant)
-        let noResultDiv = document.getElementById("no-result-message");
-        if (!noResultDiv) {
-            noResultDiv = document.createElement("div");
-            noResultDiv.id = "no-result-message";
-            noResultDiv.style.display = "none";
-            noResultDiv.style.textAlign = "center";
-            noResultDiv.style.marginTop = "20px";
-            noResultDiv.textContent = "Aucun artiste/groupe trouvé.";
-            // On l'insère après le conteneur existant
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.querySelector(".search-input");
+            const artistBoxes = document.querySelectorAll(".box");
             const container = document.querySelector(".container");
-            container.parentNode.insertBefore(noResultDiv, container.nextSibling);
-        }
-
-        searchInput.addEventListener("input", function() {
-            const searchValue = searchInput.value.toLowerCase();
-            let visibleCount = 0;
-
-            artistBoxes.forEach(box => {
-                const artistName = box.querySelector("h4").textContent.toLowerCase();
-                if (artistName.includes(searchValue)) {
-                    box.style.display = "block";
-                    visibleCount++;
+        
+            // Création dynamique du message s'il n'existe pas encore
+            let noResultDiv = document.getElementById("no-result-message");
+            if (!noResultDiv) {
+                noResultDiv = document.createElement("div");
+                noResultDiv.id = "no-result-message";
+                noResultDiv.textContent = "Aucun artiste/groupe trouvé.";
+                container.appendChild(noResultDiv);
+            }
+        
+            searchInput.addEventListener("input", function() {
+                const searchValue = searchInput.value.toLowerCase();
+                let visibleCount = 0;
+        
+                artistBoxes.forEach(box => {
+                    const artistName = box.querySelector("h4").textContent.toLowerCase();
+                    if (artistName.includes(searchValue)) {
+                        box.style.display = "";
+                        visibleCount++;
+                    } else {
+                        box.style.display = "none";
+                    }
+                });
+        
+                // Gère l'affichage du message
+                if (visibleCount === 0) {
+                    noResultDiv.style.display = "block";
                 } else {
-                    box.style.display = "none";
+                    noResultDiv.style.display = "none";
                 }
             });
-
-            // Affiche le message si aucun artiste n'est visible, sinon le cache
-            if (visibleCount === 0) {
-                noResultDiv.style.display = "block";
-            } else {
-                noResultDiv.style.display = "none";
-            }
         });
-    });
-    </script>
+        </script>
+        
+        
+        
 </body>
 </html>
