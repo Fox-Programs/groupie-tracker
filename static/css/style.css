@@ -123,7 +123,7 @@ a  {
 }
 
 .container {
-    min-height: 500px; /* Réserve un espace fixe pour éviter tout mouvement */
+    min-height: 500px; 
     position: relative; /* Pour bien positionner le message sans affecter la mise en page */
 }
 
@@ -134,10 +134,10 @@ a  {
     font-size: 3em;
     font-weight: bold;
     text-align: center;
-    display: none; /* Caché par défaut */
-    white-space: nowrap; /* Empêche le passage à la ligne */
-    padding: 10px 20px; /* Ajoute de l'espace autour du texte */
-    border-radius: 5px; /* Arrondit les bords */
+    display: none; 
+    white-space: nowrap; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
     margin-top: 30%;
     margin-left: 68%;
 }
