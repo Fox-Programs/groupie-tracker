@@ -19,14 +19,32 @@
     <div class="container">
         {{ range .}}
         <div class="box">
-            <a href="/templates/artiste.html" >
+            <a href="/artiste.html" >
             <img src="{{ .Image }}" alt="{{ .Name }}" >
             <h4>{{ .Name }}</h4>
         </a>
         </div>
         {{ end }}
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.querySelector(".search-input");
+            const artistBoxes = document.querySelectorAll(".box");
     
-
+            searchInput.addEventListener("input", function() {
+                const searchValue = searchInput.value.toLowerCase();
+    
+                artistBoxes.forEach(box => {
+                    const artistName = box.querySelector("h4").textContent.toLowerCase();
+                    if (artistName.includes(searchValue)) {
+                        box.style.display = "block";
+                    } else {
+                        box.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>
