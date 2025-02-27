@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/style.css">
 
-    <title>Groupi Tracker</title>
+    <title>Groupie Tracker</title>
 </head>
 <header>
     <h1>Groupie Tracker</h1>
@@ -19,8 +19,10 @@
     <div class="container">
         {{ range .}}
         <div class="box">
-            <img src="{{ .Image }}" alt="{{ .Name }}">
+            <a href="/templates/artiste.html" >
+            <img src="{{ .Image }}" alt="{{ .Name }}" >
             <h4>{{ .Name }}</h4>
+        </a>
         </div>
         {{ end }}
     </div>
