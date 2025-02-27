@@ -26,6 +26,25 @@
         </div>
         {{ end }}
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() { // script s'exécutera seulement après que tout le HTML de la page ait été chargé
+            const searchInput = document.querySelector(".search-input"); // cible l’élément HTML qui a la classe search-input
+            const artistBoxes = document.querySelectorAll(".box"); //prends tous les élements présents dans les blocs pour en faire une sorte de liste
+
+            searchInput.addEventListener("input", function() { //dès qu'on tape quelque chose dans la barre de recherche, la fonction se met en route
+                const searchValue = searchInput.value.toLowerCase(); //ce qui est tapé sera automatiquement mis en minuscule
+
+                artistBoxes.forEach(box => {
+                    const artistName = box.querySelector("h4").textContent.toLowerCase();
+                    if (artistName.includes(searchValue)) {
+                        box.style.display = "block";
+                    } else {
+                        box.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
     
 
 </body>

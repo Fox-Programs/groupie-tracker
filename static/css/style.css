@@ -67,7 +67,15 @@ h4 {
     margin-top: 10%;
     margin-right: 20%;
     gap: 10px;
+    flex-direction: row;
     
+    
+}
+a  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10%;
 }
 
 .box:hover {
