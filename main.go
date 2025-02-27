@@ -11,32 +11,25 @@ import (
 const port = ":8080" // port mis dans une constante pour le réemployer par la suite
 
 func main() {
-	// URL de l'API
-	apiURL_index := "https://groupietrackers.herokuapp.com/api/artists"
-	apiURL_locations := "https://groupietrackers.herokuapp.com/api/locations"
-	apiURL_dates := "https://groupietrackers.herokuapp.com/api/dates"
+	// URL des APIs
+	apiURLIndex := "https://groupietrackers.herokuapp.com/api/artists"
+	apiURLLocations := "https://groupietrackers.herokuapp.com/api/locations"
 
-	// Appeler la fonction FetchData_index
-	data_index, err := models.FetchData_index(apiURL_index)
+	dataIndex, err := models.FetchDataIndex(apiURLIndex)
 	if err != nil {
 		fmt.Println("Erreur :", err)
 	}
 
-	// Appeler la fonction FetchData_locations_dates
-	data_locations, err := models.FetchData_locations_dates(apiURL_locations)
+	// Récupération des données
+	dataLocationsDates, err := models.GetLocationsWithDates(apiURLLocations)
 	if err != nil {
-		fmt.Println("Erreur :", err)
+		log.Fatal("Erreur récupération des données:", err)
 	}
-	data_dates, err := models.FetchData_locations_dates(apiURL_dates)
-	if err != nil {
-		fmt.Println("Erreur :", err)
-	}
-	data_locations_dates := append(data_locations, data_dates...)
 
 	// Fonctions qui permttent d'envoyer les données de l'API récupéré vers les différentes pages html
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tpl := template.Must(template.ParseFiles("templates/index.html"))
-		tpl.Execute(w, data_index)
+		tpl.Execute(w, dataIndex)
 	})
 
 	http.HandleFunc("/artiste", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
@@ -46,7 +39,7 @@ func main() {
 
 	http.HandleFunc("/location", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
 		tpl := template.Must(template.ParseFiles("templates/location.html"))
-		tpl.Execute(w, data_locations_dates)
+		tpl.Execute(w, dataLocationsDates)
 	})
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))

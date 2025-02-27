@@ -6,9 +6,15 @@
     <title>Location</title>
 </head>
 <body> 
+    <h1> Essai d'affichage des éléments </h1>
+    {{ range . }}
+    <h3> {{ .ID }} </h3>
+    {{ end }}
     {{ range . }}
     <h3> {{ .Locations }} </h3>
-    <h4> {{ .Dates }} </h4>
+    {{ end }}
+    {{ range . }}
+    <h3> {{ .Dates }} </h3>
     {{ end }}
 </body>
 </html>
