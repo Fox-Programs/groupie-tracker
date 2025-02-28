@@ -34,7 +34,7 @@ func main() {
 
 	http.HandleFunc("/artiste", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
 		tpl := template.Must(template.ParseFiles("templates/artiste.html"))
-		tpl.Execute(w, nil)
+		tpl.Execute(w, dataIndex)
 	})
 
 	http.HandleFunc("/location", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
