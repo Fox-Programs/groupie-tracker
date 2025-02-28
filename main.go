@@ -37,7 +37,7 @@ func main() {
 		tpl.Execute(w, dataIndex)
 	})
 
-	http.HandleFunc("/location", func(w http.ResponseWriter, r *http.Request) { // Page secondaire acessible depuis la première page
+	http.HandleFunc("/location", func(w http.ResponseWriter, r *http.Request) { // Page qui devait être faite par Lucas
 		tpl := template.Must(template.ParseFiles("templates/location.html"))
 		tpl.Execute(w, dataLocationsDates)
 	})

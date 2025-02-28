@@ -8,7 +8,7 @@ import (
 )
 
 type DataIndex struct {
-	ID           int      `json:"id"`           // Rajout d'un id par artist pour ne pas avoir d'erreur dans la console de la page html
+	ID           int      `json:"id"`           // Rajout d'un id par artist
 	Image        string   `json:"image"`        // Lien de l'image
 	Name         string   `json:"name"`         // Nom de l'artiste
 	CreationDate int      `json:"creationDate"` // Année de création
@@ -21,13 +21,13 @@ type APIResponseLocations struct {
 }
 
 type DataLocations struct {
-	ID        int      `json:"id"`
-	Locations []string `json:"locations"`
-	DatesURL  string   `json:"dates"` // URL vers l'API des dates
-	Dates     []string `json:"-"`     // Stocke les dates après récupération
+	ID        int      `json:"id"`        // Rajout d'un id par localisation
+	Locations []string `json:"locations"` // Stocke les localisations après récupération
+	DatesURL  string   `json:"dates"`     // URL vers l'API des dates
+	Dates     []string `json:"-"`         // Stocke les dates après récupération
 }
 
-type APIResponseDates struct {
+type APIResponseDates struct { //intermédiaire pour pouvoir récupérer les données de l'API
 	ID    int      `json:"id"`
 	Dates []string `json:"dates"`
 }
@@ -50,8 +50,7 @@ func FetchDataIndex(apiURL string) ([]DataIndex, error) {
 	return data_index, nil
 }
 
-// Fonction générique pour récupérer du JSON depuis une URL
-func fetchJSON(url string, target interface{}) error {
+func fetchLocationsDates(url string, target interface{}) error {
 	resp, err := http.Get(url)
 	if err != nil {
 		return err
@@ -71,16 +70,16 @@ func GetLocationsWithDates(locationsAPI string) ([]DataLocations, error) {
 	var locationsResponse APIResponseLocations
 
 	// Récupération des localisations
-	if err := fetchJSON(locationsAPI, &locationsResponse); err != nil {
+	if err := fetchLocationsDates(locationsAPI, &locationsResponse); err != nil {
 		return nil, err
 	}
 
-	// Boucle pour récupérer les dates associées à chaque localisation
+	// Récupération des dates associées à chaque localisation
 	for i, location := range locationsResponse.Index {
 		var datesResponse APIResponseDates
 
-		// Récupération des dates via l'URL fournie
-		if err := fetchJSON(location.DatesURL, &datesResponse); err != nil {
+		// Récupération des dates via l'URL de d'API
+		if err := fetchLocationsDates(location.DatesURL, &datesResponse); err != nil {
 			return nil, err
 		}
 
